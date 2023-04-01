@@ -6,3 +6,15 @@ se desarrollarán actividades de exploración de datos que lleven a responder pr
 
 Los archivos serán ingestados a una Base de Datos MySQL, se crearán nuevas tablas para facilitar el análisis (modelado)
 la cual será luego conectada con la herramienta de BI. 
+
+## Uso
+Para encender el proyecto:
+    docker compose up
+
+Desde un cliente se conecta a la base de datos con:
+    mysql -u root -h 127.0.0.1 -p
+
+    mysql> create database biup;
+    Query OK, 1 row affected (0,02 sec)
+
+Utilizaremos la base de datos biup para nuestra práctica

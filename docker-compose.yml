@@ -1,0 +1,22 @@
+version: '3'
+services:
+
+  db:
+    image: mysql:latest
+    restart: unless-stopped
+    ports:
+      - 3306:3306
+    volumes:
+      - ./db/lib:/var/lib/mysql
+    environment: 
+      - PYTHONUNBUFFERED=1
+      - TZ=America/Argentina/Buenos_Aires
+      - MYSQL_ROOT_PASSWORD=testbi
+  
+  load:
+    build:
+      context: ./load
+    restart: unless-stopped
+    volumes:
+      - ./load/app:/load/app
+      - ./load/files:/load/files
