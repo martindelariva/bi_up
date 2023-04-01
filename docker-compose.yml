@@ -3,11 +3,13 @@ services:
 
   db:
     image: mysql:latest
+    #command: --lower_case_table_names=1
     restart: unless-stopped
     ports:
       - 3306:3306
     volumes:
       - ./db/lib:/var/lib/mysql
+      - ./db/mysql_local.cnf:/etc/mysql/conf.d/mysql_local.cnf:ro
     environment: 
       - PYTHONUNBUFFERED=1
       - TZ=America/Argentina/Buenos_Aires
@@ -16,7 +18,11 @@ services:
   load:
     build:
       context: ./load
-    restart: unless-stopped
+    #restart: unless-stopped
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
     volumes:
       - ./load/app:/load/app
       - ./load/files:/load/files
+    environment: 
+      - MYSQL_ROOT_PASSWORD=testbi

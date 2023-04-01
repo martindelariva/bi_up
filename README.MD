@@ -12,6 +12,7 @@ Para encender el proyecto:
     docker compose up
 
 Desde un cliente se conecta a la base de datos con:
+
     mysql -u root -h 127.0.0.1 -p
 
     mysql> create database biup;
