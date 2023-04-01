@@ -9,7 +9,10 @@ la cual será luego conectada con la herramienta de BI.
 
 ## Uso
 Para encender el proyecto:
-    docker compose up
+
+    docker compose up -build
+
+### Base de Datos
 
 Desde un cliente se conecta a la base de datos con:
 
@@ -19,3 +22,31 @@ Desde un cliente se conecta a la base de datos con:
     Query OK, 1 row affected (0,02 sec)
 
 Utilizaremos la base de datos biup para nuestra práctica
+
+Luego crearemos las tablas para los 3 archivos desde el contenedor load:
+
+    docker compose exec load bash
+
+Y dentro de contenedor:
+
+    app@504499bbaa61:/load/app$ python createtables.py 
+
+### Carga de Datos
+
+Luego necesitamos colocar los archivos en el directorio 
+
+    load/files/
+
+Los archivos deberán tener los nombres:
+- business_types.csv
+- cuustomers.csv
+- orders.csv
+
+Para ingestar los datos en MySQL, desde el contenedor load:
+
+    docker compose exec load bash
+
+Y dentro de contenedor:
+
+    app@504499bbaa61:/load/app$ python loadfiles.py 
+
