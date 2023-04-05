@@ -1,0 +1,13 @@
+site_code;city_name;country_name;continent;iso_country
+BOG;Bogota;COLOMBIA;SA;CO
+CMX;Ciudad de Mexico;MEXICO;NA;MX
+BAQ;Barranquilla;COLOMBIA;SA;CO
+SPO;São Paulo;BRAZIL;SA;BR
+MDE;Medellín;COLOMBIA;SA;CO
+BHZ;Belo Horizonte;BRAZIL;SA;BR
+CWB;Curitiba;BRAZIL;SA;BR
+VCP;Campinas;BRAZIL;SA;BR
+PBC;Puebla;MEXICO;NA;MX
+GDL;Guadalajara;MEXICO;NA;MX
+MTY;Monterrey;MEXICO;NA;MX
+000;UNDEFINED;UNDEFINED;NN;NN
