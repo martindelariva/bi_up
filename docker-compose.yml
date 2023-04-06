@@ -5,8 +5,8 @@ services:
     image: mysql:latest
     #command: --lower_case_table_names=1
     restart: unless-stopped
-    ports:
-      - 3306:3306
+    #ports:
+    #  - 3306:3306
     volumes:
       - ./db/lib:/var/lib/mysql
       - ./db/mysql_local.cnf:/etc/mysql/conf.d/mysql_local.cnf:ro
@@ -14,7 +14,21 @@ services:
       - PYTHONUNBUFFERED=1
       - TZ=America/Argentina/Buenos_Aires
       - MYSQL_ROOT_PASSWORD=testbi
-  
+    
+  dwh-db:
+    image: mysql:latest
+    #command: --lower_case_table_names=1
+    restart: unless-stopped
+    ports:
+      - 3306:3306
+    volumes:
+      - ./dwh-db/lib:/var/lib/mysql
+      - ./dwh-db/mysql_local.cnf:/etc/mysql/conf.d/mysql_local.cnf:ro
+    environment: 
+      - PYTHONUNBUFFERED=1
+      - TZ=America/Argentina/Buenos_Aires
+      - MYSQL_ROOT_PASSWORD=testbi
+
   load:
     build:
       context: ./load

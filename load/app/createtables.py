@@ -7,10 +7,15 @@ mydb = mysql.connector.connect(
   password=os.environ.get("MYSQL_ROOT_PASSWORD"),
   database="biup"
 )
+mydwh = mysql.connector.connect(
+  host="dwh-db",
+  user="root",
+  password=os.environ.get("MYSQL_ROOT_PASSWORD"),
+  database="biup"
+)
 
 mycursor = mydb.cursor()
-
-
+dwhcursor = mydwh.cursor()
 
 
 mycursor.execute("CREATE TABLE IF NOT EXISTS business_types (initcap VARCHAR(64), active BOOLEAN, business_type_id INT PRIMARY KEY)")
@@ -32,11 +37,12 @@ mycursor.execute("CREATE TABLE IF NOT EXISTS site_codes (site_code CHAR(3) PRIMA
 mycursor.execute("CREATE TABLE IF NOT EXISTS exchange (id INT PRIMARY KEY AUTO_INCREMENT, rate_day DATE NOT NULL, currency_code CHAR(3) NOT NULL, \
                  currency_x_usd DECIMAL(14,7) NOT NULL)")
 
-mycursor.execute("CREATE TABLE IF NOT EXISTS sales_fact (id INT PRIMARY KEY AUTO_INCREMENT, business_name_type VARCHAR(64), \
-                 customer_site_code VARCHAR(3), archived BOOLEAN, is_key_account BOOLEAN, submitted_date DATETIME, submitted_date_hr INT, \
-                 submitted_date_dow INT, submitted_date_day INT, submitted_date_mon INT, submitted_date_year INT, delivery_date DATETIME, \
-                 delivery_date_hr int, delivery_date_dow INT, delivery_date_day INT, delivery_date_mon INT, delivery_date_year INT, customer_id INT, \
-                 site_code VARCHAR(3), total DECIMAL(8,1), total_shipping DECIMAL(8,1), order_status VARCHAR(128), gmv_enabled BOOLEAN, total_usd DECIMAL(8,2), \
-                 total_shipping_usd DECIMAL(8,2), country_name VARCHAR(128), country_currency VARCHAR(3), currency_x_usd DECIMAL(14,7))")
+dwhcursor.execute("CREATE TABLE IF NOT EXISTS sales_fact (id INT PRIMARY KEY AUTO_INCREMENT, business_name_type VARCHAR(64), \
+  customer_site_code VARCHAR(3), customer_archived BOOLEAN, is_key_account BOOLEAN, customer_notfound BOOLEAN, \
+  submitted_date DATETIME, submitted_date_hr INT, submitted_date_dow INT, submitted_date_day INT, submitted_date_mon INT, \
+  submitted_date_year INT, delivery_date DATETIME, delivery_date_dow INT, delivery_date_day INT, \
+  delivery_date_mon INT, delivery_date_year INT, customer_id INT, site_code VARCHAR(3), total DECIMAL(8,1), total_shipping DECIMAL(8,1), \
+  order_status VARCHAR(128), gmv_enabled BOOLEAN, total_usd DECIMAL(8,2), total_shipping_usd DECIMAL(8,2), country_name VARCHAR(128), \
+  country_currency VARCHAR(3), currency_x_usd DECIMAL(14,7))")
 
 mycursor.execute("SHOW TABLES")
