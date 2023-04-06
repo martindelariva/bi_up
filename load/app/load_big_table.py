@@ -23,6 +23,9 @@ dbcursor.execute("SELECT submitted_date, delivery_date, customer_id, site_code, 
 
 myresult = dbcursor.fetchall()
 
+total_record_count = len(myresult)
+record_count = 0
+
 for record in myresult:
 
     submitted_date = record[0]
@@ -54,7 +57,7 @@ for record in myresult:
     #print (business_name_result)
     
     temp_sql = f'select customers.site_code, customers.archived, customers.is_key_account FROM customers INNER JOIN orders ON \
-                  customers.customer_id=orders.customer_id WHERE customers.customer_id = "{record[2]}"'
+                  customers.customer_id=orders.customer_id WHERE customers.customer_id = "{record[2]}" limit 1'
     dbcursor.execute(temp_sql)
     sql_result = dbcursor.fetchall()
     if len(sql_result)>0:
@@ -67,7 +70,7 @@ for record in myresult:
         customer_site_code_result = '000'
         customer_archived = 0
         is_key_account = 0
-    print (sql_result)
+    #print (sql_result)
 
     #Busqueda de country_code
     temp_sql = f'select country_name FROM site_codes WHERE site_code = "{site_code}"'
@@ -77,7 +80,7 @@ for record in myresult:
         country_name = sql_result[0][0]
     else:
         country_name = 0
-    print (sql_result)
+    #print (sql_result)
 
     #Busqueda de currency
     temp_sql = f'select currency_codes.alphabetic_code, exchange.currency_x_usd FROM exchange INNER JOIN currency_codes ON \
@@ -92,7 +95,7 @@ for record in myresult:
     else:
         country_currency = 0
         currency_x_usd = 0
-    print (sql_result)
+    #print (sql_result)
 
     #Calculo en USD
     if currency_x_usd != 0:
@@ -113,6 +116,9 @@ for record in myresult:
       "{total_shipping_usd}", "{country_name}", "{country_currency}", "{currency_x_usd}" )'
     #print(sql_insert)
     dwhcursor.execute(sql_insert)
+    record_count += 1
+    if record_count%100 == 0:
+        print (f'Proceced {record_count} / {total_record_count} records')
 
 mydwh.commit()
 dwhcursor.close()
