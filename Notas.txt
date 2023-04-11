@@ -321,3 +321,10 @@ mysql> select site_code, count(site_code) from orders group by site_code;
 +-----------+------------------+
 9 rows in set (0.37 sec)
 
+
+
+CREATE USER 'metabase'@'*' IDENTIFIED WITH mysql_native_password BY 'metabasepass';
+GRANT ALL PRIVILEGES ON biup.* TO 'metabase'@'*';
+FLUSH PRIVILEGES;
+
+
