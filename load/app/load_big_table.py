@@ -27,7 +27,7 @@ for temp_record in tempresult:
 print(business_types_dict)
 
 customer_dict = {}
-temp_sql = f'select customer_id, name, business_type_id, site_code, archived, is_key_account FROM customers limit 10'
+temp_sql = f'select customer_id, name, business_type_id, site_code, archived, is_key_account FROM customers'
 dbcursor.execute(temp_sql)
 tempresult = dbcursor.fetchall()
 for temp_record in tempresult:
@@ -177,12 +177,12 @@ for record in myresult:
 
     sql_insert = f'INSERT INTO sales_fact (business_name_type, customer_site_code, customer_archived, is_key_account, customer_notfound, \
       submitted_date, submitted_date_hr, submitted_date_dow, submitted_date_day, submitted_date_mon, submitted_date_year, delivery_date, \
-      delivery_date_dow, delivery_date_day, delivery_date_mon, delivery_date_year, customer_id, \
+      delivery_date_dow, delivery_date_day, delivery_date_mon, delivery_date_year, customer_id, customer_name,\
       site_code, total, total_shipping, order_status, gmv_enabled, total_usd, total_shipping_usd, country_name, \
       country_currency, currency_x_usd) VALUES ("{business_name_result}", "{customer_site_code_result}", {customer_archived}, {is_key_account}, \
       {customer_notfound}, "{submitted_date}", "{submitted_date_hr}", "{submitted_date_dow}", "{submitted_date_day}", "{submitted_date_mon}", \
       "{submitted_date_year}", "{delivery_date}", "{delivery_date_dow}", "{delivery_date_day}", "{delivery_date_mon}", \
-      "{delivery_date_year}", "{customer_id}", "{site_code}", "{total}", "{total_shipping}", "{order_status}", "{gmv_enabled}", "{total_usd}", \
+      "{delivery_date_year}", "{customer_id}", "{customer_name}", "{site_code}", "{total}", "{total_shipping}", "{order_status}", "{gmv_enabled}", "{total_usd}", \
       "{total_shipping_usd}", "{country_name}", "{country_currency}", "{currency_x_usd}" )'
     #print(sql_insert)
     dwhcursor.execute(sql_insert)

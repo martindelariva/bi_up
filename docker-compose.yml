@@ -41,12 +41,12 @@ services:
     environment: 
       - MYSQL_ROOT_PASSWORD=testbi
 
-  metabase:
-    image: metabase/metabase:latest
-    restart: unless-stopped
-    ports:
-      - 3000:3000
-    environment:
+  #metabase:
+    #image: metabase/metabase:latest
+    #restart: unless-stopped
+    #ports:
+      #- 3000:3000
+    #environment:
       #- MB_DB_TYPE=mysql
       #- MB_DB_DBNAME=biup
       #- MB_DB_PORT=3306
@@ -54,7 +54,21 @@ services:
       #- MB_DB_PASS=metabasepass
       #- MB_DB_HOST=dwh-db
       #- MB_DB_CONNECTION_URI=jdbc:mysql://dwh-db:3306/mydb?user=root&password=testbi&allowPublicKeyRetrieval=true
-      - TZ=America/Argentina/Buenos_Aires
+      #- TZ=America/Argentina/Buenos_Aires
 
+  metabase2:
+    image: metabase/metabase:latest
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    environment:
+      - MB_DB_TYPE=mysql
+      - MB_DB_DBNAME=metabase
+      - MB_DB_PORT=3306
+      - MB_DB_USER=root
+      - MB_DB_PASS=testbi
+      - MB_DB_HOST=dwh-db
+      - MB_DB_CONNECTION_URI=jdbc:mysql://dwh-db:3306/metabase?user=root&password=testbi&allowPublicKeyRetrieval=true&trustServerCertificate=true
+      - TZ=America/Argentina/Buenos_Aires
 
 
