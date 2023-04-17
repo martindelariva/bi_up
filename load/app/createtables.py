@@ -45,4 +45,6 @@ dwhcursor.execute("CREATE TABLE IF NOT EXISTS sales_fact (id INT PRIMARY KEY AUT
   order_status VARCHAR(128), gmv_enabled BOOLEAN, total_usd DECIMAL(8,2), total_shipping_usd DECIMAL(8,2), country_name VARCHAR(128), \
   country_currency VARCHAR(3), currency_x_usd DECIMAL(14,7))")
 
+dwhcursor.execute("CREATE TABLE IF NOT EXISTS batch_load_ctrl (batch_id INT PRIMARY KEY, ingest_date DATETIME)") 
+
 mycursor.execute("SHOW TABLES")

@@ -328,3 +328,10 @@ GRANT ALL PRIVILEGES ON biup.* TO 'metabase'@'*';
 FLUSH PRIVILEGES;
 
 
+export MB_DB_TYPE=mysql
+export MB_DB_DBNAME=metabase
+export MB_DB_PORT=3306
+export MB_DB_USER=root
+export MB_DB_PASS=testbi
+export MB_DB_HOST=localhost
+java -jar metabase.jar

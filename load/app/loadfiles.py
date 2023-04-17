@@ -1,5 +1,7 @@
 import csv
 import os
+import shutil
+import datetime
 import mysql.connector
 
 mydb = mysql.connector.connect(
@@ -75,7 +77,8 @@ for csvfile_name in csvfiles:
             #print(sql_string)
             mycursor.execute(sql_string)
     print(f'    Processed in file {csvfile_name}: {line_count-1} records.\n')
-
+    t=datetime.datetime.now()
+    shutil.move(FILES_PATH+csvfile_name, f'{FILES_PATH}{csvfile_name}-{t.year}-{t.month}-{t.day}_{t.hour}-{t.minute}')
 mydb.commit()
 mycursor.close()
 
